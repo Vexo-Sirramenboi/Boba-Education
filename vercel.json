@@ -1,26 +1,12 @@
 ﻿{
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "server.mjs",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "server.mjs"
+      "source": "/api/(.*)",
+      "destination": "/api/index.mjs"
     },
     {
-      "src": "/d/(.*)",
-      "dest": "server.mjs"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/d/(.*)",
+      "destination": "/api/index.mjs"
     }
   ]
 }
