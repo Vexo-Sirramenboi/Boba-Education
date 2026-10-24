@@ -1,12 +1,12 @@
-﻿{
+{
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/index.mjs"
+      "source": "/api/:match*",
+      "destination": "/api"
     },
     {
-      "source": "/d/(.*)",
-      "destination": "/api/index.mjs"
+      "source": "/d/:match*",
+      "destination": "/api"
     }
   ]
 }
