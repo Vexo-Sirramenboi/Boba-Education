@@ -1,4 +1,4 @@
-{
+﻿{
   "version": 2,
   "rewrites": [
     {
@@ -7,10 +7,6 @@
     },
     {
       "source": "/d/(.*)",
-      "destination": "/server.mjs"
-    },
-    {
-      "source": "/e/(.*)",
       "destination": "/server.mjs"
     }
   ]
