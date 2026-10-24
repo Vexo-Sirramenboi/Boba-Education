@@ -1,0 +1,18 @@
+{
+  "name": "link-parser-test-main",
+  "version": "1.0.0",
+  "description": "",
+  "main": "md.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0",
+    "http-proxy-middleware": "^4.2.0",
+    "wisp-server-node": "^1.1.8"
+  }
+}
