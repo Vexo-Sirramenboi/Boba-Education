@@ -1,4 +1,4 @@
-const ux = (h, k = "b0b4cup") => h.match(/../g).map((x, i) => String.fromCharCode(parseInt(x, 16) ^ k.charCodeAt(i % k.length))).join("");
+const ux = (h, k = "b0b4cup") => h.match(./../g).map((x, i) => String.fromCharCode(parseInt(x, 16) ^ k.charCodeAt(i % k.length))).join("");
 const LINES = [
   "1543110e4c5a170b420e47130715125c07474d1a02051f155d4c",
   "1543110e4c5a040a550342021b1307580d4006195e015f0f1b131c1510434d",
@@ -28,7 +28,7 @@ function opens(url, ms) {
   });
 }
 
-const ALL = [...LINES, (location.protocol === "https:" ? "wss://" : "ws://") + location.host + "/e/"];
+const ALL = [...LINES, (location.protocol === "https:" ? "wss://" : "ws://") + location.host + "./e/"];
 const bad = new Set();
 let conn = null;
 let cur = -1;
@@ -84,7 +84,7 @@ export async function recover() {
   }
   cur = await pickLine();
   remember(cur);
-  await conn.setTransport("/a/net.mjs", [{ wisp: ALL[cur] }]);
+  await conn.setTransport("./a/net.mjs", [{ wisp: ALL[cur] }]);
   return true;
 }
 
@@ -108,13 +108,13 @@ function loadScript(src) {
 }
 
 async function startDeep() {
-  await loadScript("/a/d/all.js");
+  await loadScript("./a/d/all.js");
   const load = window.$scramjetLoadController;
   if (typeof load !== "function") throw new Error("controller missing");
   const { ScramjetController } = load();
   deepCtl = new ScramjetController({
-    prefix: "/d/",
-    files: { wasm: "/a/d/rw.wasm", all: "/a/d/all.js", sync: "/a/d/sync.js" },
+    prefix: "./d/",
+    files: { wasm: "./a/d/rw.wasm", all: "./a/d/all.js", sync: "./a/d/sync.js" },
     flags: { sourcemaps: false, rewriterLogs: false, cleanErrors: true },
   });
   await deepCtl.init();
@@ -124,18 +124,18 @@ async function startDeep() {
 async function startSwift() {
   if (!("serviceWorker" in navigator)) throw new Error("no service worker");
 
-  await navigator.serviceWorker.register("/sw.js", { scope: "/" });
+  await navigator.serviceWorker.register("./sw.js", { scope: "/" });
   await navigator.serviceWorker.ready;
 
-  await loadScript("/a/core.js");
-  await loadScript("/a/cfg.js");
+  await loadScript("./a/core.js");
+  await loadScript("./a/cfg.js");
 
-  const mux = await import("/a/mux/index.mjs");
+  const mux = await import("./a/mux/index.mjs");
   const Conn = mux.NetMuxConnection || mux.BareMuxConnection;
-  conn = new Conn("/a/mux/worker.js");
+  conn = new Conn("./a/mux/worker.js");
   cur = await pickLine();
   remember(cur);
-  await conn.setTransport("/a/net.mjs", [{ wisp: ALL[cur] }]);
+  await conn.setTransport("./a/net.mjs", [{ wisp: ALL[cur] }]);
 
   state.swift = true;
 }
@@ -162,15 +162,15 @@ export function boot() {
 export function normalise(input) {
   const raw = String(input || "").trim();
   if (!raw) return "";
-  if (/^https?:\/\//i.test(raw)) return raw;
-  if (/^[a-z0-9-]+(\.[a-z0-9-]+)+(\/\S*)?$/i.test(raw)) return "https://" + raw;
+  if (./^https?:\/\//i.test(raw)) return raw;
+  if (./^[a-z0-9-]+(\.[a-z0-9-]+)+(\/\S*)?$/i.test(raw)) return "https://" + raw;
   return "https://duckduckgo.com/?q=" + encodeURIComponent(raw);
 }
 
 export function encode(url, mode) {
   if (mode === "deep") {
     if (deepCtl && typeof deepCtl.encodeUrl === "function") return deepCtl.encodeUrl(url);
-    return "/d/" + encodeURIComponent(url);
+    return "./d/" + encodeURIComponent(url);
   }
   const cfg = window.__io$config;
   if (!cfg) return "";
@@ -185,7 +185,7 @@ export function decode(href) {
       if (u.origin !== location.origin) return /^https?:$/.test(u.protocol) ? u.href : "";
       const rest = u.href.slice(u.origin.length);
       const cfg = window.__io$config;
-      if (rest.startsWith("/d/")) real = deepCtl ? deepCtl.decodeUrl(u.href) : decodeURIComponent(rest.slice(3));
+      if (rest.startsWith("./d/")) real = deepCtl ? deepCtl.decodeUrl(u.href) : decodeURIComponent(rest.slice(3));
       else if (cfg && rest.startsWith(cfg.prefix)) real = cfg.decodeUrl(rest.slice(cfg.prefix.length).split("#")[0]) + u.hash;
       else return "";
     }

@@ -8,7 +8,7 @@ export const el = (h) => {
   return t.content.firstElementChild;
 };
 export const esc = (s) =>
-  String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  String(s ?? "").replace(./[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 const CUP = document.getElementById("intro")?.innerHTML || "";
 export const cup = () => CUP;
@@ -54,7 +54,7 @@ export function failPage(frame, url, retry) {
   const v = (k, f) => cs.getPropertyValue(k).trim() || f;
   let host = url;
   try {
-    host = new URL(url).hostname.replace(/^www\./, "");
+    host = new URL(url).hostname.replace(./^www\./, "");
   } catch {}
   d.open();
   d.write(
@@ -64,7 +64,7 @@ export function failPage(frame, url, retry) {
       ".c img{width:72px;height:auto;opacity:.9;margin-bottom:16px}h1{font-size:19px;font-weight:700;margin:0 0 4px;letter-spacing:-.01em}" +
       "p{margin:0 0 22px;color:" + v("--ink-2", "rgba(43,26,16,.64)") + "}button{height:40px;padding:0 22px;border:0;border-radius:999px;background:" + v("--acc", "#8A5631") +
       ";color:" + v("--acc-ink", "#fff") + ";font:600 14px Inter,system-ui,sans-serif;cursor:pointer;transition:transform .2s}button:active{transform:scale(.96)}" +
-      '</style><div class="c"><img alt="" src="/img/boba-cup.svg"><h1>Couldn\'t load this page</h1><p>' + esc(host) + '</p><button id="again" type="button">Try again</button></div>'
+      '</style><div class="c"><img alt="" src="./img/boba-cup.svg"><h1>Couldn\'t load this page</h1><p>' + esc(host) + '</p><button id="again" type="button">Try again</button></div>'
   );
   d.close();
   d.getElementById("again").addEventListener("click", retry);
@@ -97,4 +97,4 @@ export function segThumb(seg) {
 }
 
 export const initials = (name) =>
-  String(name || "?").trim().split(/\s+/).slice(0, 2).map((w) => w[0]).join("").toUpperCase() || "?";
+  String(name || "?").trim().split(./\s+/).slice(0, 2).map((w) => w[0]).join("").toUpperCase() || "?";

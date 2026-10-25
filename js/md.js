@@ -54,10 +54,10 @@ function grab(s, maths) {
     return display ? "\n\u0002" + n + "\u0002\n" : "\u0001" + n + "\u0001";
   };
   return s
-    .replace(/\$\$([\s\S]+?)\$\$/g, (_, t) => put(t, true))
-    .replace(/\\\[([\s\S]+?)\\\]/g, (_, t) => put(t, true))
+    .replace(./\$\$([\s\S]+?)\$\$/g, (_, t) => put(t, true))
+    .replace(./\\\[([\s\S]+?)\\\]/g, (_, t) => put(t, true))
     .replace(ENV, (m) => put(m, true))
-    .replace(/\\\(([\s\S]+?)\\\)/g, (_, t) => put(t, false))
+    .replace(./\\\(([\s\S]+?)\\\)/g, (_, t) => put(t, false))
     .replace(/(^|[^\\\w$])\$(?![\s$])([^$\n]*?[^\s\\$])\$(?![\w$])/g, (_, pre, t) => pre + put(t, false));
 }
 function protect(src, maths) {
@@ -68,7 +68,7 @@ function protect(src, maths) {
     buf = [];
   };
   for (const l of src.split("\n")) {
-    if (/^\s*```/.test(l)) {
+    if (./^\s*```/.test(l)) {
       if (!fence) flush();
       fence = !fence;
       out.push(l);
@@ -95,27 +95,27 @@ const mdInline = (s) =>
       i % 2
         ? "<code>" + esc(part.slice(1, -1)) + "</code>"
         : esc(part)
-            .replace(/\*\*(.+?)\*\*/g, "<b>$1</b>")
+            .replace(./\*\*(.+?)\*\*/g, "<b>$1</b>")
             .replace(/(^|[\s(])\*(?!\s)(.+?)\*(?=[\s).,!?:;]|$)/g, "$1<i>$2</i>")
-            .replace(/\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2">$1</a>')
-            .replace(/【(\d{1,2})(?:†[^】]*)?】/g, "[$1]")
-            .replace(/\[(\d{1,2})\](?!\()/g, (m, n) => (cites[n - 1] ? '<a class="cite" href="' + esc(cites[n - 1].url) + '">' + n + "</a>" : m)),
+            .replace(./\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2">$1</a>')
+            .replace(./【(\d{1,2})(?:†[^】]*)?】/g, "[$1]")
+            .replace(./\[(\d{1,2})\](?!\()/g, (m, n) => (cites[n - 1] ? '<a class="cite" href="' + esc(cites[n - 1].url) + '">' + n + "</a>" : m)),
     )
     .join("");
 
 const SPECIAL = /^\s*(```|#{1,6}\s|[-*+]\s|\d+[.)]\s|>|\||\u0002|([-*_])(\s*\2){2,}\s*$)/;
 const RULE = /^\s*([-*_])(\s*\1){2,}\s*$/;
-const cells = (row) => row.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim());
+const cells = (row) => row.trim().replace(./^\||\|$/g, "").split("|").map((c) => c.trim());
 
 export function md(src, { sources = [], onReady } = {}) {
   const maths = [];
-  const lines = protect(String(src).replace(/\r/g, ""), maths).split("\n");
+  const lines = protect(String(src).replace(./\r/g, ""), maths).split("\n");
   cites = Array.isArray(sources) ? sources : [];
   const out = [];
   let i = 0;
   while (i < lines.length) {
     const l = lines[i];
-    const fence = l.match(/^\s*```\s*([\w+#.-]*)/);
+    const fence = l.match(./^\s*```\s*([\w+#.-]*)/);
     if (fence) {
       const buf = [];
       i++;
@@ -123,7 +123,7 @@ export function md(src, { sources = [], onReady } = {}) {
       const closed = i < lines.length;
       i++;
       const code = buf.join("\n");
-      if (/^mermaid$/i.test(fence[1]))
+      if (./^mermaid$/i.test(fence[1]))
         out.push('<div class="mmd" data-mmd="' + esc(code) + '"' + (closed ? "" : " data-open") + '><span class="ai-dots"><i></i><i></i><i></i></span></div>');
       else out.push('<pre><button class="cpy" type="button" data-cpy aria-label="Copy code">' + ico("copy") + "</button><code>" + esc(code) + "</code></pre>");
       continue;
@@ -132,19 +132,19 @@ export function md(src, { sources = [], onReady } = {}) {
       i++;
       continue;
     }
-    if (/^\s*\u0002\d+\u0002\s*$/.test(l)) {
+    if (./^\s*\u0002\d+\u0002\s*$/.test(l)) {
       out.push(l.trim());
       i++;
       continue;
     }
-    const h = l.match(/^\s*(#{1,6})\s+(.*)$/);
+    const h = l.match(./^\s*(#{1,6})\s+(.*)$/);
     if (h) {
       const n = Math.min(6, h[1].length + 2);
       out.push("<h" + n + ">" + mdInline(h[2]) + "</h" + n + ">");
       i++;
       continue;
     }
-    if (/^\s*\|/.test(l) && i + 1 < lines.length && /^\s*\|?\s*:?-{2,}/.test(lines[i + 1])) {
+    if (./^\s*\|/.test(l) && i + 1 < lines.length && /^\s*\|?\s*:?-{2,}/.test(lines[i + 1])) {
       const head = cells(l);
       i += 2;
       const rows = [];
@@ -158,7 +158,7 @@ export function md(src, { sources = [], onReady } = {}) {
       i++;
       continue;
     }
-    const list = l.match(/^\s*([-*+]|\d+[.)])\s+/);
+    const list = l.match(./^\s*([-*+]|\d+[.)])\s+/);
     if (list) {
       const ordered = /\d/.test(list[1]);
       const re = ordered ? /^\s*\d+[.)]\s+/ : /^\s*[-*+]\s+/;
@@ -172,9 +172,9 @@ export function md(src, { sources = [], onReady } = {}) {
       out.push("<" + tag + ">" + items.map((x) => "<li>" + x.split("<br>").map(mdInline).join("<br>") + "</li>").join("") + "</" + tag + ">");
       continue;
     }
-    if (/^\s*>/.test(l)) {
+    if (./^\s*>/.test(l)) {
       const buf = [];
-      while (i < lines.length && /^\s*>/.test(lines[i])) buf.push(lines[i++].replace(/^\s*>\s?/, ""));
+      while (i < lines.length && /^\s*>/.test(lines[i])) buf.push(lines[i++].replace(./^\s*>\s?/, ""));
       out.push("<blockquote>" + buf.map(mdInline).join("<br>") + "</blockquote>");
       continue;
     }
@@ -187,8 +187,8 @@ export function md(src, { sources = [], onReady } = {}) {
   if (maths.length && !window.katex && onReady) mathLib().then(onReady, () => {});
   return out
     .join("")
-    .replace(/\u0002(\d+)\u0002/g, (_, n) => '<div class="mth">' + texHtml(maths[+n], true) + "</div>")
-    .replace(/\u0001(\d+)\u0001/g, (_, n) => texHtml(maths[+n], false));
+    .replace(./\u0002(\d+)\u0002/g, (_, n) => '<div class="mth">' + texHtml(maths[+n], true) + "</div>")
+    .replace(./\u0001(\d+)\u0001/g, (_, n) => texHtml(maths[+n], false));
 }
 
 let drawing = null, drawn = 0;
@@ -234,7 +234,7 @@ export async function diagrams(root) {
     if (!box.isConnected) continue;
     box.classList.add("done");
     const code = box.dataset.mmd, tries = [code];
-    if (/^\s*(flowchart|graph)\b/.test(code)) tries.push(quoteLabels(code));
+    if (./^\s*(flowchart|graph)\b/.test(code)) tries.push(quoteLabels(code));
     for (const src of tries) {
       try {
         const { svg } = await window.mermaid.render("mmd" + ++drawn, src);
@@ -248,4 +248,4 @@ export async function diagrams(root) {
   }
 }
 const quoteLabels = (code) =>
-  code.replace(/\b([\w-]+)\[(?!["[(/\\])([^\]\n]*[(){}<>|#;:,][^\]\n]*)\](?!\])/g, (_, id, label) => id + '["' + label.replace(/"/g, "'") + '"]');
+  code.replace(./\b([\w-]+)\[(?!["[(./\\])([^\]\n]*[(){}<>|#;:,][^\]\n]*)\](?!\])/g, (_, id, label) => id + '["' + label.replace(/"./g, "'") + '"]');

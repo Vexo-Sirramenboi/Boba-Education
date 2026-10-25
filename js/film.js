@@ -43,7 +43,7 @@ export function createFilm({ over, show, close, history, music, boot, sources })
   const frame = () => $(".pv iframe", over);
   const pref = () => Math.max(0, Math.min(store.get("src", 0), sources() - 1));
   const seasons = () => (st.det && st.det.seasonList) || [];
-  const episodes = (s) => get("/api/watch/season/" + st.item.id + "/" + s).catch(() => []);
+  const episodes = (s) => get("./api/watch/season/" + st.item.id + "/" + s).catch(() => []);
   const last = (item) => history.list().find((h) => h.kind === "film" && h.type === item.type && h.id === item.id);
   const fresh = (h) => !!h && h.t > 60 && h.d > 600 && h.t < h.d - 120;
   const color = () => (ACCENTS[store.get("accent", 6)] || ACCENTS[6])[1].slice(1);
@@ -59,7 +59,7 @@ export function createFilm({ over, show, close, history, music, boot, sources })
   }
 
   const url = (n, again) =>
-    "/api/watch/go/" + n + "/" + st.item.type + "/" + st.item.id + (tv() ? "/" + st.s + "/" + st.e : "") +
+    "./api/watch/go/" + n + "/" + st.item.type + "/" + st.item.id + (tv() ? "/" + st.s + "/" + st.e : "") +
     "?c=" + color() + (again ? "&r=" + Date.now() : "");
 
   const layer = (on) => $("[data-ld]", over)?.classList.toggle("off", !on);
@@ -287,7 +287,7 @@ export function createFilm({ over, show, close, history, music, boot, sources })
     paintSteps();
     st.tried = new Set([pref()]);
     load(pref());
-    const d = await get("/api/watch/title/" + item.type + "/" + item.id).catch(() => null);
+    const d = await get("./api/watch/title/" + item.type + "/" + item.id).catch(() => null);
     if (st.item !== item || !d) return;
     st.det = d;
     const h2 = d.logo && $("[data-lc] h2", over);

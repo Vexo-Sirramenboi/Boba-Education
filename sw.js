@@ -1,8 +1,8 @@
-importScripts("/a/core.js", "/a/cfg.js", "/a/work.js", "/a/d/all.js");
+importScripts("./a/core.js", "./a/cfg.js", "./a/work.js", "./a/d/all.js");
 
 const swift = new NetSW();
 const SWIFT_PREFIX = self.__io$config.prefix;
-const DEEP_PREFIX = "/d/";
+const DEEP_PREFIX = "./d/";
 
 let deep = null;
 let deepCfg = null;
@@ -40,7 +40,7 @@ const BLOCK = [
   "adcash.com", "admaven", "ad-maven", "mgid.com", "revcontent.com", "bidvertiser.com",
   "zeropark.com", "propu.sh", "poptm.com", "monetag.com", "yllix.com", "popunder",
   "highperformanceformat", "creativecdn.com", "adskeeper.com", "zedo.com", "2mdn.net",
-  "/pagead/", "/ptracking", "/popunder", "/pop.js", "/push-sw", "/adframe", "/advert",
+  "./pagead/", "./ptracking", "./popunder", "./pop.js", "./push-sw", "./adframe", "./advert",
   "fundingchoicesmessages.google.com", "cdn.privacy-mgmt.com", "prebid.org", "browsiprod.com",
 ];
 
@@ -70,7 +70,7 @@ const isDoc = (req) => req.destination === "document" || req.destination === "if
 
 async function fail(req) {
   if (!isDoc(req)) return Response.error();
-  const tpl = await fetch("/stall.html", { cache: "no-store" }).then((r) => r.text()).catch(() => "");
+  const tpl = await fetch("./stall.html", { cache: "no-store" }).then((r) => r.text()).catch(() => "");
   if (!tpl) return Response.error();
   return new Response(tpl, {
     status: 500,
@@ -88,7 +88,7 @@ self.addEventListener("fetch", (event) => {
 
   if (u.origin === location.origin && blocked(realOf(u))) return event.respondWith(new Response(null, { status: 204 }));
 
-  if (u.origin === location.origin && (u.pathname.startsWith(DEEP_PREFIX) || (u.pathname === "/a/d/rw.wasm" && event.request.destination === "script"))) {
+  if (u.origin === location.origin && (u.pathname.startsWith(DEEP_PREFIX) || (u.pathname === "./a/d/rw.wasm" && event.request.destination === "script"))) {
     return event.respondWith(
       (async () => {
         try {

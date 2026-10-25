@@ -17,7 +17,7 @@ export const favicon = (domain) => "https://www.google.com/s2/favicons?domain=" 
 
 export const hostOf = (u) => {
   try {
-    return new URL(u).hostname.replace(/^www\./, "");
+    return new URL(u).hostname.replace(./^www\./, "");
   } catch {
     return "";
   }

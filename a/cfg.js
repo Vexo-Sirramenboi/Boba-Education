@@ -1,12 +1,12 @@
 self.__io$config = {
-  prefix: "/s/",
+  prefix: "./s/",
   encodeUrl: Nova.codec.xor.encode,
   decodeUrl: Nova.codec.xor.decode,
-  handler: "/a/hook.js",
-  client: "/a/view.js",
-  bundle: "/a/core.js",
-  config: "/a/cfg.js",
-  sw: "/a/work.js",
+  handler: "./a/hook.js",
+  client: "./a/view.js",
+  bundle: "./a/core.js",
+  config: "./a/cfg.js",
+  sw: "./a/work.js",
   inject: [
     {
       host: ".*",

@@ -91,7 +91,7 @@ function wash(url) {
   im.src = url;
 }
 
-const fullSrc = (t) => (t.vid ? "/api/listen/play?v=" + t.vid : "/api/listen/play?a=" + encodeURIComponent(t.artist || "") + "&t=" + encodeURIComponent(t.title || ""));
+const fullSrc = (t) => (t.vid ? "./api/listen/play?v=" + t.vid : "./api/listen/play?a=" + encodeURIComponent(t.artist || "") + "&t=" + encodeURIComponent(t.title || ""));
 const player = {
   audio: new Audio(),
   list: [],
@@ -229,7 +229,7 @@ const epCard = (x, s, on, fb) =>
   (x.still ? still(x.still, "w300") + '" data-fb="' + fb : fb) + '"></div><div class="nm">' + x.e + " · " + esc(x.name) + '</div><div class="sm">' +
   (x.runtime ? x.runtime + "m" : "") + "</div></button>";
 async function paintEps(item, s) {
-  const list = await get("/api/watch/season/" + item.id + "/" + s).catch(() => []);
+  const list = await get("./api/watch/season/" + item.id + "/" + s).catch(() => []);
   const rail = sheet._item === item && $("[data-eps]", sheet);
   if (!rail) return;
   const h = lastFilm(item);
@@ -284,7 +284,7 @@ async function openTitle(item, from) {
     sheet.style.opacity = "1";
   }
   try {
-    const d = await get("/api/watch/title/" + item.type + "/" + item.id);
+    const d = await get("./api/watch/title/" + item.type + "/" + item.id);
     if (sheet._item === item) fill(d);
   } catch {}
 }
@@ -389,14 +389,9 @@ function playGame(g) {
     }
     setTimeout(() => gl?.classList.add("off"), 400);
   });
-  if (g.url && g.url.startsWith("/games-repo/")) {
-    if (f.isConnected) f.src = g.url;
-    gl?.classList.add("off");
-  } else {
-    browser.open(g.url, "deep").then((src) => {
-      if (src && f.isConnected) f.src = src;
-    }, () => {});
-  }
+  browser.open(g.url, "deep").then((src) => {
+    if (src && f.isConnected) f.src = src;
+  }, () => {});
 }
 
 const views = $("#views");
@@ -523,7 +518,7 @@ function disguise(name) {
   const d = DISGUISES[name];
   document.title = d ? d[0] : "Boba";
   const link = $("link[rel='icon']");
-  if (link) link.href = d ? favicon(d[1]) : "/img/boba-cup.svg";
+  if (link) link.href = d ? favicon(d[1]) : "./img/boba-cup.svg";
 }
 
 document.addEventListener("click", (e) => {
@@ -580,7 +575,7 @@ account.on(() => {
 });
 account.boot();
 
-get("/api/config")
+get("./api/config")
   .then((c) => (config = c))
   .catch(() => {})
   .finally(() => {

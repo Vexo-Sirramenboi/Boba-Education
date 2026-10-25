@@ -6,7 +6,7 @@ const subs = new Set();
 let me = null, applying = false, timer = 0, dirty = false;
 
 async function call(path, body, method) {
-  const r = await fetch("/api/account" + path, {
+  const r = await fetch("./api/account" + path, {
     method: method || (body ? "POST" : "GET"),
     headers: body ? { "Content-Type": "application/json" } : {},
     body: body ? JSON.stringify(body) : undefined,
@@ -50,7 +50,7 @@ async function push() {
   if (!me || !dirty) return;
   dirty = false;
   try {
-    await call("/data", { data: snapshot() }, "PUT");
+    await call("./data", { data: snapshot() }, "PUT");
   } catch {
     dirty = true;
   }
@@ -97,38 +97,38 @@ export const account = {
     } catch {}
     emit();
   },
-  login: (email, password) => call("/login", { email, password }).then(signedIn),
-  register: (name, email, password) => call("/register", { name, email, password }),
-  verify: (email, code, tok) => call("/register/verify", { email, code, tok }).then(signedIn),
-  sendCode: (email, purpose) => call("/code", { email, purpose }),
-  codeLogin: (email, code) => call("/code/login", { email, code }).then(signedIn),
-  reset: (email, code, password) => call("/reset", { email, code, password }).then(signedIn),
-  changeEmail: (email, password) => call("/email", { email, password }),
-  confirmEmail: (code) => call("/email/verify", { code }).then(updated),
-  profile: (fields) => call("/profile", fields).then(updated),
+  login: (email, password) => call("./login", { email, password }).then(signedIn),
+  register: (name, email, password) => call("./register", { name, email, password }),
+  verify: (email, code, tok) => call("./register/verify", { email, code, tok }).then(signedIn),
+  sendCode: (email, purpose) => call("./code", { email, purpose }),
+  codeLogin: (email, code) => call("./code/login", { email, code }).then(signedIn),
+  reset: (email, code, password) => call("./reset", { email, code, password }).then(signedIn),
+  changeEmail: (email, password) => call("./email", { email, password }),
+  confirmEmail: (code) => call("./email/verify", { code }).then(updated),
+  profile: (fields) => call("./profile", fields).then(updated),
   async upload(blob) {
-    const r = await fetch("/api/account/pic", { method: "POST", headers: { "Content-Type": blob.type }, body: blob, credentials: "same-origin" });
+    const r = await fetch("./api/account/pic", { method: "POST", headers: { "Content-Type": blob.type }, body: blob, credentials: "same-origin" });
     const d = await r.json().catch(() => ({}));
     if (!r.ok) throw new Error(d.msg || "Something went wrong. Try again.");
     return updated(d);
   },
-  dropPic: () => call("/pic", null, "DELETE").then(updated),
+  dropPic: () => call("./pic", null, "DELETE").then(updated),
   async download() {
-    const r = await fetch("/api/account/export", { credentials: "same-origin" });
+    const r = await fetch("./api/account/export", { credentials: "same-origin" });
     if (!r.ok) throw new Error((await r.json().catch(() => ({}))).msg || "Something went wrong. Try again.");
     return r.blob();
   },
   async leave() {
     await push();
     try {
-      await call("/logout", {});
+      await call("./logout", {});
     } catch {}
     me = null;
     emit();
   },
-  password: (current, password) => call("/password", { current, password }),
+  password: (current, password) => call("./password", { current, password }),
   async remove(password) {
-    await call("/delete", { password });
+    await call("./delete", { password });
     me = null;
     emit();
   },

@@ -1,4 +1,4 @@
-﻿import { $, $$, el, esc, ico, cup, store, clockText, debounce, segThumb, initials, failPage } from "./ui.js";
+import { $, $$, el, esc, ico, cup, store, clockText, debounce, segThumb, initials, failPage } from "./ui.js";
 import { get, still, favicon, hostOf } from "./api.js";
 import { md, diagrams } from "./md.js";
 import { readPhoto, readDoc, isPhoto } from "./attach.js";
@@ -28,7 +28,7 @@ const metaRow = (item, d) => {
 const posterTile = (m, r, i, wide) =>
   '<button class="pst' + (wide ? " wide" : "") + '" data-r="' + r + '" data-i="' + i + '" data-id="' + m.id + '"><div class="im"><img class="fade" loading="lazy" decoding="async" alt="" src="' +
   (wide ? still(m.backdrop, "w500") : still(m.poster, "w342")) + '"></div><div class="nm">' + esc(m.name) + '</div><div class="sm">' +
-  esc([m.year, (m.genres || [])[0]].filter(Boolean).join(" Â· ")) + "</div></button>";
+  esc([m.year, (m.genres || [])[0]].filter(Boolean).join(" · ")) + "</div></button>";
 function brick(root, wall, { want, phone, tile, square, done }) {
   const b = { items: [], cols: 0, placed: 0, row: 0 };
   const io = new IntersectionObserver((es) => {
@@ -166,7 +166,7 @@ const home = {
     const tabsEl = $("[data-tabs]", root);
     const tip = $("[data-tip]", root);
     const tab = () => st.tabs.find((t) => t.id === st.active);
-    const clean = (s) => String(s || "").split(./\s+[-â€“Â·|]\s+/)[0].trim();
+    const clean = (s) => String(s || "").split(./\s+[-–·|]\s+/)[0].trim();
     const readable = (s) => {
       try {
         return decodeURI(s);
@@ -503,7 +503,7 @@ const watch = {
     '<div class="mw"><div class="mw-bar r"><div class="mw-tabs" data-kind role="tablist">' +
     '<button class="mw-tab on" type="button" role="tab" aria-selected="true" data-k="movie">' + ico("watch") + "Movies</button>" +
     '<button class="mw-tab" type="button" role="tab" aria-selected="false" data-k="tv">' + ico("tv") + "TV Shows</button></div>" +
-    '<label class="mw-q">' + ico("search") + '<input data-wq type="search" placeholder="Searchâ€¦" aria-label="Search" autocomplete="off" spellcheck="false"></label></div>' +
+    '<label class="mw-q">' + ico("search") + '<input data-wq type="search" placeholder="Search…" aria-label="Search" autocomplete="off" spellcheck="false"></label></div>' +
     '<div class="adb" data-adb></div><p class="mw-note" data-wnote hidden></p><div class="mw-wall r" style="--d:.06s" data-wall></div><div class="mw-end" data-wend></div></div>',
   mount(root, ctx) {
     const st = (this.st = { type: "movie", q: "", seen: new Set(), page: 1, more: false, busy: false, tok: 0, loaded: false });
@@ -511,7 +511,7 @@ const watch = {
     const tile = (m, i) =>
       '<div class="mw-p" role="button" tabindex="0" data-i="' + i + '" aria-label="' + esc(m.name) + '"><img class="fade" decoding="async" alt="" data-src="' + still(m.poster, "w342") + '">' +
       (ctx.config.play ? '<span class="mw-go" data-go>' + ico("go") + "</span>" : "") +
-      '<span class="mw-i"><b>' + esc(m.name) + "</b><span>" + (m.score && m.score !== "0.0" ? ico("star") + esc(m.score) + " Â· " : "") + esc(m.year || "") + "</span></span></div>";
+      '<span class="mw-i"><b>' + esc(m.name) + "</b><span>" + (m.score && m.score !== "0.0" ? ico("star") + esc(m.score) + " · " : "") + esc(m.year || "") + "</span></span></div>";
     const wall = brick(root, $("[data-wall]", root), { want: 142, phone: 106, tile });
     const fresh = (list) => (list || []).filter((m) => m && m.poster && !st.seen.has(m.id) && st.seen.add(m.id));
     const near = () => end.getBoundingClientRect().top < root.getBoundingClientRect().bottom + 900;
@@ -545,7 +545,7 @@ const watch = {
         st.busy = false;
         wall.reset(fresh(list));
         if (q && !wall.items.length) {
-          note.textContent = "Nothing found for â€œ" + q + "â€";
+          note.textContent = "Nothing found for “" + q + "”";
           note.hidden = false;
           return;
         }
@@ -554,7 +554,7 @@ const watch = {
         if (tok !== st.tok) return;
         st.busy = false;
         wall.reset([]);
-        note.textContent = q ? "Search isnâ€™t working right now." : "Films are offline.";
+        note.textContent = q ? "Search isn’t working right now." : "Films are offline.";
         note.hidden = false;
       }
     };
@@ -606,7 +606,16 @@ const watch = {
 
 const artAt = (u, n) => String(u || "").replace(./\/\d+x\d+bb\./, "/" + n + "x" + n + "bb.").replace(/(\/api\/listen\/art\/[yl]\/)\d+\//, "$1" + n + "/");
 const baseTitle = (s) => String(s || "").toLowerCase().replace(./\s*[([].*?[)\]]/g, "").replace(./\s+-\s+.*$/, "").trim();
-const uniqSongs = (list) => list;
+const uniqSongs = (list) => {
+  const seen = new Set();
+  return list.filter((t) => {
+    const a = "a" + t.art, b = "t" + String(t.artist).toLowerCase() + "|" + baseTitle(t.title);
+    if (seen.has(a) || seen.has(b)) return false;
+    seen.add(a);
+    seen.add(b);
+    return true;
+  });
+};
 const MTABS = [["top", "Discover", ""], ["liked", "Liked", "heart"], ["queue", "Queue", "listen"], ["hist", "History", "clock"]];
 const MEMPTY = { top: "Music is offline.", liked: "No liked songs yet.", queue: "Nothing in the queue.", hist: "Nothing played yet." };
 const listen = {
@@ -728,7 +737,7 @@ const listen = {
         const songs = await get("./api/listen/search?q=" + encodeURIComponent(q));
         if (n === st.seq) show(songs, "No songs found.");
       } catch {
-        if (n === st.seq) show([], "Search isnâ€™t working right now.");
+        if (n === st.seq) show([], "Search isn’t working right now.");
       }
     }, 320);
     lq.addEventListener("input", search);
@@ -807,7 +816,7 @@ const listen = {
 const play = {
   html: () =>
     '<div class="mw"><div class="mw-bar r"><label class="mw-q">' + ico("search") +
-    '<input data-pq type="search" placeholder="Search gamesâ€¦" aria-label="Search games" autocomplete="off" spellcheck="false"></label></div>' +
+    '<input data-pq type="search" placeholder="Search games…" aria-label="Search games" autocomplete="off" spellcheck="false"></label></div>' +
     '<div class="adb" data-adb></div><p class="mw-note" data-pnote hidden></p><div class="mw-wall r" style="--d:.06s" data-grid></div><div class="mw-end" data-pend></div></div>',
   mount(root, ctx) {
     const st = (this.st = { all: [], view: [], shown: 0 });
@@ -875,7 +884,7 @@ const chip = (f, i) =>
     ? f.url ? '<img class="th" alt="" src="' + f.url + '">' : '<span class="fi ph">' + ico("image") + "</span>"
     : '<span class="fi">' + ico("file") + "</span>") +
   '<span class="nm"><b>' + esc(f.name) + "</b>" +
-  (f.loading ? "<small>Readingâ€¦</small>" : f.pages ? "<small>" + f.pages + (f.pages > 1 ? " pages" : " page") + "</small>" : "") +
+  (f.loading ? "<small>Reading…</small>" : f.pages ? "<small>" + f.pages + (f.pages > 1 ? " pages" : " page") + "</small>" : "") +
   "</span>" + (i !== undefined ? '<button class="x" type="button" data-rm="' + i + '" aria-label="Remove">' + ico("x") + "</button>" : "") + "</span>";
 const qEl = (m, pics) => {
   const d = document.createElement("div");
@@ -896,7 +905,7 @@ const aSrc = (list) =>
 const aFoot = (m) =>
   '<div class="ai-f">' + (m.text ? '<button type="button" data-copy aria-label="Copy">' + ico("copy") + "</button>" : "") +
   '<button type="button" data-regen aria-label="Regenerate">' + ico("reload") + "</button>" +
-  (m.model ? '<span class="ai-m">' + ico(tierOf(m.model.tier)[1]) + "<b>" + tierOf(m.model.tier)[0] + "</b> Â· " + esc(m.model.name) + "</span>" : "") + "</div>";
+  (m.model ? '<span class="ai-m">' + ico(tierOf(m.model.tier)[1]) + "<b>" + tierOf(m.model.tier)[0] + "</b> · " + esc(m.model.name) + "</span>" : "") + "</div>";
 const ACCEPT = "image/*,.pdf,.docx,.txt,.md,.csv,.json,.html,.htm,.xml,.js,.ts,.py,.java,.c,.cpp,.cs,.go,.rs,.php,.sql,.yml,.yaml,.log,.tex";
 
 const ask = {
@@ -943,8 +952,8 @@ const ask = {
     const empty = () => {
       thread.classList.add("empty");
       inner.innerHTML = '<div class="ai-hi"><h1>' + esc(greet()) + "</h1>" +
-        (st.ready ? '<div class="sugs">' + ["Explain photosynthesis simply", "Outline an essay on climate", "Quiz me on world capitals", "Fix this sentenceâ€™s grammar"].map((s) => "<button type=\"button\" data-s>" + esc(s) + "</button>").join("") + "</div>"
-          : '<p class="off">Ask isnâ€™t set up yet.</p>') + "</div>";
+        (st.ready ? '<div class="sugs">' + ["Explain photosynthesis simply", "Outline an essay on climate", "Quiz me on world capitals", "Fix this sentence’s grammar"].map((s) => "<button type=\"button\" data-s>" + esc(s) + "</button>").join("") + "</div>"
+          : '<p class="off">Ask isn’t set up yet.</p>') + "</div>";
     };
     const order = () => st.list.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0) || (b.updated || 0) - (a.updated || 0));
     const paintList = () => {
@@ -1058,7 +1067,7 @@ const ask = {
           credentials: "same-origin",
           signal: ctl.signal,
         });
-        if (!r.ok || !r.body) err = (await r.json().catch(() => ({}))).msg || "Couldnâ€™t answer that. Try again.";
+        if (!r.ok || !r.body) err = (await r.json().catch(() => ({}))).msg || "Couldn’t answer that. Try again.";
         else {
           const rd = r.body.getReader(), dec = new TextDecoder();
           let buf = "";
@@ -1094,14 +1103,14 @@ const ask = {
               else if (ev === "t") {
                 m.text += d.t || "";
                 later();
-              } else if (ev === "fail") err = d.msg || "Couldnâ€™t answer that. Try again.";
+              } else if (ev === "fail") err = d.msg || "Couldn’t answer that. Try again.";
               else if (ev === "done") m.id = d.id || 0;
             }
           }
-          if (!m.text && !err) err = "Couldnâ€™t answer that. Try again.";
+          if (!m.text && !err) err = "Couldn’t answer that. Try again.";
         }
       } catch {
-        if (!ctl.signal.aborted) err = "Couldnâ€™t reach Ask. Check your connection.";
+        if (!ctl.signal.aborted) err = "Couldn’t reach Ask. Check your connection.";
         else if (!m.text) err = "Stopped.";
       }
       cancelAnimationFrame(raf);
@@ -1111,7 +1120,7 @@ const ask = {
     const send = async (text) => {
       text = String(text || "").trim();
       if (st.busy) return;
-      if (st.att.some((x) => x.loading)) return say("Still reading your fileâ€¦");
+      if (st.att.some((x) => x.loading)) return say("Still reading your file…");
       if (!text && !st.att.length) return;
       const att = st.att;
       st.att = [];
@@ -1467,7 +1476,7 @@ const account = {
     '<button class="btn k s" type="submit">Save</button><p class="msg" hidden></p></form></section>' +
     '<section class="grp gl g2 r" style="--d:.12s"><h3 class="cardh">Privacy</h3>' +
     '<div class="lr">' + lic("clock", "#5ee08a", "#139b48") + '<h3>Save history</h3><button class="tg" type="button" role="switch" aria-label="Save history" data-keep><i></i></button></div>' +
-    '<div class="lr">' + lic("shield", "#2be0e6", "#0b8f86") + '<h3>Autoâ€‘clear</h3><div class="seg" data-forget><span class="th"></span>' +
+    '<div class="lr">' + lic("shield", "#2be0e6", "#0b8f86") + '<h3>Auto‑clear</h3><div class="seg" data-forget><span class="th"></span>' +
     '<button type="button" data-fg="0">Never</button><button type="button" data-fg="1">1 day</button><button type="button" data-fg="7">1 week</button></div></div>' +
     '<div class="lr">' + lic("trash", "#ffbe2e", "#ff7a1a") + '<h3>Clear history</h3><button class="btn s" type="button" data-clr>Clear</button></div></section>' +
     '<section class="grp gl g2 wide r" style="--d:.16s"><h3 class="cardh">Your data</h3>' +
@@ -1883,4 +1892,3 @@ const settings = {
 
 export const VIEWS = { home, watch, listen, play, ask, account, settings };
 export { metaRow, posterTile, runtime };
-
