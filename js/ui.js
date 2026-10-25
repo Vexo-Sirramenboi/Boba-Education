@@ -54,7 +54,7 @@ export function failPage(frame, url, retry) {
   const v = (k, f) => cs.getPropertyValue(k).trim() || f;
   let host = url;
   try {
-    host = new URL(url).hostname.replace(./^www\./, "");
+    host = new URL(url).hostname.replace(/^www\./, "");
   } catch {}
   d.open();
   d.write(
@@ -97,4 +97,4 @@ export function segThumb(seg) {
 }
 
 export const initials = (name) =>
-  String(name || "?").trim().split(./\s+/).slice(0, 2).map((w) => w[0]).join("").toUpperCase() || "?";
+  String(name || "?").trim().split(/\s+/).slice(0, 2).map((w) => w[0]).join("").toUpperCase() || "?";
