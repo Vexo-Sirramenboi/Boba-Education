@@ -8,9 +8,9 @@ export const el = (h) => {
   return t.content.firstElementChild;
 };
 export const esc = (s) =>
-  String(s ?? "").replace(./[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  String((s !== null && s !== undefined) ? s : "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-const CUP = document.getElementById("intro")?.innerHTML || "";
+const CUP = ((document.getElementById("intro") && document.getElementById("intro").innerHTML) || "") || "";
 export const cup = () => CUP;
 
 export const ico = (k, cls = "i", fill) =>
