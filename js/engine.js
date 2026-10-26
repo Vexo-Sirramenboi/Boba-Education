@@ -1,4 +1,4 @@
-const ux = (h, k = "b0b4cup") => h.match(/../g).map((x, i) => String.fromCharCode(parseInt(x, 16) ^ k.charCodeAt(i % k.length))).join("");
+const ux = (h, k = "b0b4cup") => h.match(./../g).map((x, i) => String.fromCharCode(parseInt(x, 16) ^ k.charCodeAt(i % k.length))).join("");
 const LINES = [
   "1543110e4c5a170b420e47130715125c07474d1a02051f155d4c",
   "1543110e4c5a040a550342021b1307580d4006195e015f0f1b131c1510434d",
@@ -29,6 +29,7 @@ function opens(url, ms) {
 }
 
 const ALL = [...LINES, (location.protocol === "https:" ? "wss://" : "ws://") + location.host + "./e/"];
+const LOCAL = ALL.length - 1;
 const bad = new Set();
 let conn = null;
 let cur = -1;
@@ -70,10 +71,11 @@ function raceOpen(idxs, ms) {
 }
 
 async function pickLine() {
+  if (!bad.has(LOCAL) && (await opens(ALL[LOCAL], 6000))) return LOCAL;
   const r = remembered();
-  if (r >= 0 && !bad.has(r) && (await opens(ALL[r], 3000))) return r;
-  const win = await raceOpen(ALL.map((_, i) => i).filter((i) => i !== r && !bad.has(i)), 3000);
-  return win >= 0 ? win : ALL.length - 1;
+  if (r >= 0 && r !== LOCAL && !bad.has(r) && (await opens(ALL[r], 3000))) return r;
+  const win = await raceOpen(ALL.map((_, i) => i).filter((i) => i !== LOCAL && !bad.has(i)), 3000);
+  return win >= 0 ? win : LOCAL;
 }
 
 export async function recover() {
@@ -162,8 +164,8 @@ export function boot() {
 export function normalise(input) {
   const raw = String(input || "").trim();
   if (!raw) return "";
-  if (/^https?:\/\//i.test(raw)) return raw;
-  if (/^[a-z0-9-]+(\.[a-z0-9-]+)+(\/\S*)?$/i.test(raw)) return "https://" + raw;
+  if (./^https?:\/\//i.test(raw)) return raw;
+  if (./^[a-z0-9-]+(\.[a-z0-9-]+)+(\/\S*)?$/i.test(raw)) return "https://" + raw;
   return "https://duckduckgo.com/?q=" + encodeURIComponent(raw);
 }
 

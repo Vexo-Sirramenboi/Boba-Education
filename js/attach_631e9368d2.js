@@ -30,7 +30,7 @@ let worker = "";
 export async function readDoc(file) {
   const name = file.name || "File";
   let text = "", pages = 0;
-  if (/\.pdf$/i.test(name) || file.type === "application/pdf") {
+  if (./\.pdf$/i.test(name) || file.type === "application/pdf") {
     if (file.size > 40e6) throw new Error("That PDF is too big.");
     await load(LIBS.pdf);
     const lib = window.pdfjsLib;
@@ -49,7 +49,7 @@ export async function readDoc(file) {
     }
     doc.destroy();
     if (!text.trim()) throw new Error("That PDF has no text to read.");
-  } else if (/\.docx$/i.test(name)) {
+  } else if (./\.docx$/i.test(name)) {
     if (file.size > 25e6) throw new Error("That file is too big.");
     await load(LIBS.mammoth);
     try {
@@ -61,7 +61,7 @@ export async function readDoc(file) {
     if (file.size > 3e6) throw new Error("That file is too big.");
     text = await file.text();
   } else throw new Error("Use a photo, PDF, Word or text file.");
-  text = text.replace(/\r/g, "").replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+  text = text.replace(./\r/g, "").replace(./[ \t]+\n/g, "\n").replace(./\n{3,}/g, "\n\n").trim();
   if (!text) throw new Error("That file is empty.");
   return { kind: "file", name, pages, text: text.slice(0, TEXT_MAX) };
 }

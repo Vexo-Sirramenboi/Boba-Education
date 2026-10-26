@@ -114,7 +114,7 @@ const qlHtml = () => {
 const qlKey = (u) => {
   try {
     const x = new URL(u);
-    return x.hostname.replace(/^www\./, "") + x.pathname.replace(/\/+$/, "") + x.search;
+    return x.hostname.replace(./^www\./, "") + x.pathname.replace(./\/+$/, "") + x.search;
   } catch {
     return u;
   }
@@ -123,7 +123,7 @@ const linkOf = (raw) => {
   const s = String(raw || "").trim();
   if (!s || /\s/.test(s)) return "";
   try {
-    const u = new URL(/^https?:\/\//i.test(s) ? s : "https://" + s);
+    const u = new URL(./^https?:\/\//i.test(s) ? s : "https://" + s);
     return /^https?:$/.test(u.protocol) && /^[a-z0-9-]+(\.[a-z0-9-]+)+$/i.test(u.hostname) ? u.href : "";
   } catch {
     return "";
@@ -166,7 +166,7 @@ const home = {
     const tabsEl = $("[data-tabs]", root);
     const tip = $("[data-tip]", root);
     const tab = () => st.tabs.find((t) => t.id === st.active);
-    const clean = (s) => String(s || "").split(/\s+[-–·|]\s+/)[0].trim();
+    const clean = (s) => String(s || "").split(./\s+[-–·|]\s+/)[0].trim();
     const readable = (s) => {
       try {
         return decodeURI(s);
@@ -284,7 +284,7 @@ const home = {
         u = t && t.url && document.activeElement !== omni && omni.value === t.url ? new URL(t.url) : null;
       } catch {}
       addr.classList.toggle("show", !!u);
-      if (u) disp.innerHTML = "<b>" + esc(u.host.replace(/^www\./, "")) + "</b><span>" + esc(readable((u.pathname + u.search + u.hash).replace(/\/$/, ""))) + "</span>";
+      if (u) disp.innerHTML = "<b>" + esc(u.host.replace(./^www\./, "")) + "</b><span>" + esc(readable((u.pathname + u.search + u.hash).replace(./\/$/, ""))) + "</span>";
     };
     const closeTab = (id) => {
       const i = st.tabs.findIndex((t) => t.id === id);
@@ -571,7 +571,7 @@ const watch = {
       load(b.dataset.k, st.q);
     });
     qIn.addEventListener("input", debounce(() => {
-      const q = qIn.value.replace(/\s+/g, " ").trim();
+      const q = qIn.value.replace(./\s+/g, " ").trim();
       const next = q.length >= 2 ? q : "";
       if (next === st.q) return;
       root.scrollTop = 0;
@@ -604,8 +604,8 @@ const watch = {
   },
 };
 
-const artAt = (u, n) => String(u || "").replace(/\/\d+x\d+bb\./, "/" + n + "x" + n + "bb.").replace(/(\/api\/listen\/art\/[yl]\/)\d+\//, "$1" + n + "/");
-const baseTitle = (s) => String(s || "").toLowerCase().replace(/\s*[([].*?[)\]]/g, "").replace(/\s+-\s+.*$/, "").trim();
+const artAt = (u, n) => String(u || "").replace(./\/\d+x\d+bb\./, "/" + n + "x" + n + "bb.").replace(/(\/api\/listen\/art\/[yl]\/)\d+\//, "$1" + n + "/");
+const baseTitle = (s) => String(s || "").toLowerCase().replace(./\s*[([].*?[)\]]/g, "").replace(./\s+-\s+.*$/, "").trim();
 const uniqSongs = (list) => {
   const seen = new Set();
   return list.filter((t) => {
@@ -720,7 +720,7 @@ const listen = {
       $$("button", tabs).forEach((b) => b.classList.toggle("on", b.dataset.mt === k && !st.q));
     };
     const search = debounce(async () => {
-      const q = lq.value.replace(/\s+/g, " ").trim();
+      const q = lq.value.replace(./\s+/g, " ").trim();
       const n = ++st.seq;
       if (q.length < 2) {
         if (!st.q) return;
@@ -900,7 +900,7 @@ const qEl = (m, pics) => {
 const aSrc = (list) =>
   list && list.length
     ? '<div class="ai-src">' + list.map((s, i) => '<a href="' + esc(s.url) + '" title="' + esc(s.title) + '"><img alt="" src="./api/icon?d=' + encodeURIComponent(s.site) + '">' +
-        esc(String(s.site).replace(/^(en|m|www)\./, "")) + "<i>" + (i + 1) + "</i></a>").join("") + "</div>"
+        esc(String(s.site).replace(./^(en|m|www)\./, "")) + "<i>" + (i + 1) + "</i></a>").join("") + "</div>"
     : "";
 const aFoot = (m) =>
   '<div class="ai-f">' + (m.text ? '<button type="button" data-copy aria-label="Copy">' + ico("copy") + "</button>" : "") +
@@ -1245,7 +1245,7 @@ const ask = {
       const save = async (keep) => {
         if (done) return;
         done = true;
-        const t = inp.value.replace(/\s+/g, " ").trim();
+        const t = inp.value.replace(./\s+/g, " ").trim();
         if (keep && t && t !== c.title) {
           c.title = t;
           const r = await patch(id, { title: t });
@@ -1540,7 +1540,7 @@ const account = {
       sub.disabled = false;
     };
     const mail = () => form.email.value.trim();
-    const code = () => form.code.value.replace(/\D/g, "");
+    const code = () => form.code.value.replace(./\D/g, "");
     const sent = (s, email, again) => {
       st.email = email;
       st.sent = Date.now();
@@ -1713,7 +1713,7 @@ const account = {
       emf.classList.toggle("one", two);
       $("button[type=submit]", emf).textContent = two ? "Confirm" : "Send code";
     };
-    emf.code.addEventListener("input", () => (emf.code.value = emf.code.value.replace(/\D/g, "")));
+    emf.code.addEventListener("input", () => (emf.code.value = emf.code.value.replace(./\D/g, "")));
     pair("[data-embtn]", "[data-emform]", (f) => {
       f.reset();
       emStage(false);
