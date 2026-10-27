@@ -15,176 +15,183 @@
     },
     {
         "id":  "3",
-        "title":  "DECO 27 - ラビットホール feat. 初音ミク",
+        "title":  "Chemical Overreaction Compound Fracture (2020 Remastered Version)",
         "artist":  "Track 3",
+        "art":  "/music/Chemical%20Overreaction%20Compound%20Fracture%20(2020%20Remastered%20Version).jpg",
+        "preview":  "/music/Chemical%20Overreaction%20Compound%20Fracture%20(2020%20Remastered%20Version).mp3"
+    },
+    {
+        "id":  "4",
+        "title":  "DECO 27 - ラビットホール feat. 初音ミク",
+        "artist":  "Track 4",
         "art":  "/music/DECO%2027%20-%20%E3%83%A9%E3%83%93%E3%83%83%E3%83%88%E3%83%9B%E3%83%BC%E3%83%AB%20feat.%20%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF.jpg",
         "preview":  "/music/DECO%2027%20-%20%E3%83%A9%E3%83%93%E3%83%83%E3%83%88%E3%83%9B%E3%83%BC%E3%83%AB%20feat.%20%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF.mp3"
     },
     {
-        "id":  "4",
+        "id":  "5",
         "title":  "Demetori - 風神少女 (Wind God Girl)",
-        "artist":  "Track 4",
+        "artist":  "Track 5",
         "art":  "/music/Demetori%20-%20%E9%A2%A8%E7%A5%9E%E5%B0%91%E5%A5%B3%20(Wind%20God%20Girl).jpg",
         "preview":  "/music/Demetori%20-%20%E9%A2%A8%E7%A5%9E%E5%B0%91%E5%A5%B3%20(Wind%20God%20Girl).mp3"
     },
     {
-        "id":  "5",
+        "id":  "6",
         "title":  "DEMON\u0027S SHOT",
-        "artist":  "Track 5",
+        "artist":  "Track 6",
         "art":  "/music/DEMON\u0027S%20SHOT.jpg",
         "preview":  "/music/DEMON\u0027S%20SHOT.mp3"
     },
     {
-        "id":  "6",
+        "id":  "7",
         "title":  "Eternal Bringer of Sloth - Release",
-        "artist":  "Track 6",
+        "artist":  "Track 7",
         "art":  "/music/Eternal%20Bringer%20of%20Sloth%20-%20Release.jpg",
         "preview":  "/music/Eternal%20Bringer%20of%20Sloth%20-%20Release.mp3"
     },
     {
-        "id":  "7",
+        "id":  "8",
         "title":  "Farruko - Pepas (Audio)",
-        "artist":  "Track 7",
+        "artist":  "Track 8",
         "art":  "/music/Farruko%20-%20Pepas%20(Audio).jpg",
         "preview":  "/music/Farruko%20-%20Pepas%20(Audio).mp3"
     },
     {
-        "id":  "8",
+        "id":  "9",
         "title":  "Flamewall",
-        "artist":  "Track 8",
+        "artist":  "Track 9",
         "art":  "/music/Flamewall.jpg",
         "preview":  "/music/Flamewall.mp3"
     },
     {
-        "id":  "9",
+        "id":  "10",
         "title":  "Hailey Lain, Alicia Michelle, Cody Fullbrook - Welcome Home - 2022 REMASTER (SPOTISAVER)",
-        "artist":  "Track 9",
+        "artist":  "Track 10",
         "art":  "/music/Hailey%20Lain%2C%20Alicia%20Michelle%2C%20Cody%20Fullbrook%20-%20Welcome%20Home%20-%202022%20REMASTER%20(SPOTISAVER).jpg",
         "preview":  "/music/Hailey%20Lain%2C%20Alicia%20Michelle%2C%20Cody%20Fullbrook%20-%20Welcome%20Home%20-%202022%20REMASTER%20(SPOTISAVER).mp3"
     },
     {
-        "id":  "10",
+        "id":  "11",
         "title":  "Hiiragi_Magnetite_Kasane_Teto_-_Tetoris",
-        "artist":  "Track 10",
+        "artist":  "Track 11",
         "art":  "/music/Hiiragi_Magnetite_Kasane_Teto_-_Tetoris.jpg",
         "preview":  "/music/Hiiragi_Magnetite_Kasane_Teto_-_Tetoris.mp3"
     },
     {
-        "id":  "11",
+        "id":  "12",
         "title":  "Inaba Cumori ft. Kaai Yuki Lost Umbrella (ロストアンブレラ) - English Subbed",
-        "artist":  "Track 11",
+        "artist":  "Track 12",
         "art":  "/music/Inaba%20Cumori%20ft.%20Kaai%20Yuki%20Lost%20Umbrella%20(%E3%83%AD%E3%82%B9%E3%83%88%E3%82%A2%E3%83%B3%E3%83%96%E3%83%AC%E3%83%A9)%20-%20English%20Subbed.jpg",
         "preview":  "/music/Inaba%20Cumori%20ft.%20Kaai%20Yuki%20Lost%20Umbrella%20(%E3%83%AD%E3%82%B9%E3%83%88%E3%82%A2%E3%83%B3%E3%83%96%E3%83%AC%E3%83%A9)%20-%20English%20Subbed.mp3"
     },
     {
-        "id":  "12",
+        "id":  "13",
         "title":  "Instability (V3)",
-        "artist":  "Track 12",
+        "artist":  "Track 13",
         "art":  "/music/Instability%20(V3).jpg",
         "preview":  "/music/Instability%20(V3).mp3"
     },
     {
-        "id":  "13",
+        "id":  "14",
         "title":  "Larping the Rooms (Green)",
-        "artist":  "Track 13",
+        "artist":  "Track 14",
         "art":  "/music/Larping%20the%20Rooms%20(Green).jpg",
         "preview":  "/music/Larping%20the%20Rooms%20(Green).mp3"
     },
     {
-        "id":  "14",
+        "id":  "15",
         "title":  "Mr. Capgras Encounters a Secondhand Vanity_ Tulpamancer\u0027s Prosopagnosia  Pareidolia",
-        "artist":  "Track 14",
+        "artist":  "Track 15",
         "art":  "/music/Mr.%20Capgras%20Encounters%20a%20Secondhand%20Vanity_%20Tulpamancer\u0027s%20Prosopagnosia%20%20Pareidolia.jpg",
         "preview":  "/music/Mr.%20Capgras%20Encounters%20a%20Secondhand%20Vanity_%20Tulpamancer\u0027s%20Prosopagnosia%20%20Pareidolia.mp3"
     },
     {
-        "id":  "15",
+        "id":  "16",
         "title":  "Noli",
-        "artist":  "Track 15",
+        "artist":  "Track 16",
         "art":  "/music/Noli.jpg",
         "preview":  "/music/Noli.mp3"
     },
     {
-        "id":  "16",
+        "id":  "17",
         "title":  "READY OR NOT",
-        "artist":  "Track 16",
+        "artist":  "Track 17",
         "art":  "/music/READY%20OR%20NOT.jpg",
         "preview":  "/music/READY%20OR%20NOT.mp3"
     },
     {
-        "id":  "17",
+        "id":  "18",
         "title":  "Reign of Silence - Release",
-        "artist":  "Track 17",
+        "artist":  "Track 18",
         "art":  "/music/Reign%20of%20Silence%20-%20Release.jpg",
         "preview":  "/music/Reign%20of%20Silence%20-%20Release.mp3"
     },
     {
-        "id":  "18",
+        "id":  "19",
         "title":  "Run Rabbit Run ft. Miyamai Moca",
-        "artist":  "Track 18",
+        "artist":  "Track 19",
         "art":  "/music/Run%20Rabbit%20Run%20ft.%20Miyamai%20Moca.jpg",
         "preview":  "/music/Run%20Rabbit%20Run%20ft.%20Miyamai%20Moca.mp3"
     },
     {
-        "id":  "19",
+        "id":  "20",
         "title":  "The Larping Tombstone - Looping the Rooms (Larping the Rooms) (Remix)",
-        "artist":  "Track 19",
+        "artist":  "Track 20",
         "art":  "/music/The%20Larping%20Tombstone%20-%20Looping%20the%20Rooms%20(Larping%20the%20Rooms)%20(Remix).jpg",
         "preview":  "/music/The%20Larping%20Tombstone%20-%20Looping%20the%20Rooms%20(Larping%20the%20Rooms)%20(Remix).mp3"
     },
     {
-        "id":  "20",
+        "id":  "21",
         "title":  "The Song with Five Names a.k.a. Soapbox Tao a.k.a. Checkmate Atheists! a.k.a. Neospace... - Will Wood and the Tapeworms",
-        "artist":  "Track 20",
+        "artist":  "Track 21",
         "art":  "/music/The%20Song%20with%20Five%20Names%20a.k.a.%20Soapbox%20Tao%20a.k.a.%20Checkmate%20Atheists!%20a.k.a.%20Neospace...%20-%20Will%20Wood%20and%20the%20Tapeworms.jpg",
         "preview":  "/music/The%20Song%20with%20Five%20Names%20a.k.a.%20Soapbox%20Tao%20a.k.a.%20Checkmate%20Atheists!%20a.k.a.%20Neospace...%20-%20Will%20Wood%20and%20the%20Tapeworms.mp3"
     },
     {
-        "id":  "21",
+        "id":  "22",
         "title":  "Through Patches Of Violets",
-        "artist":  "Track 21",
+        "artist":  "Track 22",
         "art":  "/music/Through%20Patches%20Of%20Violets.jpg",
         "preview":  "/music/Through%20Patches%20Of%20Violets.mp3"
     },
     {
-        "id":  "22",
+        "id":  "23",
         "title":  "Timmy Trumpet \u0026 Savage - Freaks (Official Visualiser)",
-        "artist":  "Track 22",
+        "artist":  "Track 23",
         "art":  "/music/Timmy%20Trumpet%20%26%20Savage%20-%20Freaks%20(Official%20Visualiser).jpg",
         "preview":  "/music/Timmy%20Trumpet%20%26%20Savage%20-%20Freaks%20(Official%20Visualiser).mp3"
     },
     {
-        "id":  "23",
+        "id":  "24",
         "title":  "Waltz of the Meatball Man(REGRETEVATOR OST)",
-        "artist":  "Track 23",
+        "artist":  "Track 24",
         "art":  "/music/Waltz%20of%20the%20Meatball%20Man(REGRETEVATOR%20OST).jpg",
         "preview":  "/music/Waltz%20of%20the%20Meatball%20Man(REGRETEVATOR%20OST).mp3"
     },
     {
-        "id":  "24",
+        "id":  "25",
         "title":  "Will Wood and the Tapeworms - Hand Me My Shovel, I\u0027m Going In! - Fatbird Karaoke - Fatbird Karaoke (youtube)",
-        "artist":  "Track 24",
+        "artist":  "Track 25",
         "art":  "/music/Will%20Wood%20and%20the%20Tapeworms%20-%20Hand%20Me%20My%20Shovel%2C%20I\u0027m%20Going%20In!%20-%20Fatbird%20Karaoke%20-%20Fatbird%20Karaoke%20(youtube).jpg",
         "preview":  "/music/Will%20Wood%20and%20the%20Tapeworms%20-%20Hand%20Me%20My%20Shovel%2C%20I\u0027m%20Going%20In!%20-%20Fatbird%20Karaoke%20-%20Fatbird%20Karaoke%20(youtube).mp3"
     },
     {
-        "id":  "25",
+        "id":  "26",
         "title":  "[MV] ABM - \u0027ヤラララ\u0027 (YARARARA) feat. 重音テト",
-        "artist":  "Track 25",
+        "artist":  "Track 26",
         "art":  "/music/%5BMV%5D%20ABM%20-%20\u0027%E3%83%A4%E3%83%A9%E3%83%A9%E3%83%A9\u0027%20(YARARARA)%20feat.%20%E9%87%8D%E9%9F%B3%E3%83%86%E3%83%88.jpg",
         "preview":  "/music/%5BMV%5D%20ABM%20-%20\u0027%E3%83%A4%E3%83%A9%E3%83%A9%E3%83%A9\u0027%20(YARARARA)%20feat.%20%E9%87%8D%E9%9F%B3%E3%83%86%E3%83%88.mp3"
     },
     {
-        "id":  "26",
+        "id":  "27",
         "title":  "メズマライザー 初音ミク・重音テトSV",
-        "artist":  "Track 26",
+        "artist":  "Track 27",
         "art":  "/music/%E3%83%A1%E3%82%BA%E3%83%9E%E3%83%A9%E3%82%A4%E3%82%B6%E3%83%BC%20%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%E3%83%BB%E9%87%8D%E9%9F%B3%E3%83%86%E3%83%88SV.jpg",
         "preview":  "/music/%E3%83%A1%E3%82%BA%E3%83%9E%E3%83%A9%E3%82%A4%E3%82%B6%E3%83%BC%20%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%E3%83%BB%E9%87%8D%E9%9F%B3%E3%83%86%E3%83%88SV.mp3"
     },
     {
-        "id":  "27",
+        "id":  "28",
         "title":  "展示中毒 (feat. Hatsune Miku)",
-        "artist":  "Track 27",
+        "artist":  "Track 28",
         "art":  "/music/%E5%B1%95%E7%A4%BA%E4%B8%AD%E6%AF%92%20(feat.%20Hatsune%20Miku).jpg",
         "preview":  "/music/%E5%B1%95%E7%A4%BA%E4%B8%AD%E6%AF%92%20(feat.%20Hatsune%20Miku).mp3"
     }
