@@ -1,4 +1,4 @@
-import { I } from "./icons.js";
+﻿import { I } from "./icons.js";
 
 export const $ = (s, r) => (r || document).querySelector(s);
 export const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
@@ -98,3 +98,4 @@ export function segThumb(seg) {
 
 export const initials = (name) =>
   String(name || "?").trim().split(/\s+/).slice(0, 2).map((w) => w[0]).join("").toUpperCase() || "?";
+

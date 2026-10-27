@@ -1,4 +1,4 @@
-const cache = new Map();
+﻿const cache = new Map();
 
 export function get(url) {
   if (cache.has(url)) return cache.get(url);
@@ -22,3 +22,4 @@ export const hostOf = (u) => {
     return "";
   }
 };
+

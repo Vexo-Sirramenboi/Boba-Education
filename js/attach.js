@@ -1,4 +1,4 @@
-import { LIBS, load } from "./md.js";
+﻿import { LIBS, load } from "./md.js";
 
 export const TEXT_MAX = 20000;
 const TEXTY = /\.(txt|md|markdown|csv|tsv|json|xml|html?|css|js|mjs|ts|tsx|jsx|py|java|c|h|cpp|hpp|cs|go|rs|rb|php|swift|kt|sql|sh|bat|ps1|ya?ml|ini|toml|log|tex|srt|vtt)$/i;
@@ -65,3 +65,4 @@ export async function readDoc(file) {
   if (!text) throw new Error("That file is empty.");
   return { kind: "file", name, pages, text: text.slice(0, TEXT_MAX) };
 }
+

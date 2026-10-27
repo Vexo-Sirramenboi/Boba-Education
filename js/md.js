@@ -1,4 +1,4 @@
-import { esc, ico } from "./ui.js";
+﻿import { esc, ico } from "./ui.js";
 
 const CDN = "https://cdnjs.cloudflare.com/ajax/libs/";
 export const LIBS = {
@@ -249,3 +249,4 @@ export async function diagrams(root) {
 }
 const quoteLabels = (code) =>
   code.replace(/\b([\w-]+)\[(?!["[(/\\])([^\]\n]*[(){}<>|#;:,][^\]\n]*)\](?!\])/g, (_, id, label) => id + '["' + label.replace(/"./g, "'") + '"]');
+

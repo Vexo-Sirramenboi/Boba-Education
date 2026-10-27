@@ -1,4 +1,4 @@
-import { $, $$, el, esc, ico, cup, store, clockText, debounce, segThumb, initials, failPage } from "./ui.js";
+﻿import { $, $$, el, esc, ico, cup, store, clockText, debounce, segThumb, initials, failPage } from "./ui.js";
 import { get, still, favicon, hostOf } from "./api.js";
 import { md, diagrams } from "./md.js";
 import { readPhoto, readDoc, isPhoto } from "./attach.js";
@@ -1892,3 +1892,4 @@ const settings = {
 
 export const VIEWS = { home, watch, listen, play, ask, account, settings };
 export { metaRow, posterTile, runtime };
+
