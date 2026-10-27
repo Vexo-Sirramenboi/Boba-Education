@@ -1,4 +1,4 @@
-import { I } from "./icons.js";
+﻿import { I } from "./icons.js";
 
 export const $ = (s, r) => (r || document).querySelector(s);
 export const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
@@ -8,9 +8,9 @@ export const el = (h) => {
   return t.content.firstElementChild;
 };
 export const esc = (s) =>
-  String(s ?? "").replace(./[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  String((s !== null && s !== undefined) ? s : "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-const CUP = document.getElementById("intro")?.innerHTML || "";
+const CUP = ((document.getElementById("intro") && document.getElementById("intro").innerHTML) || "") || "";
 export const cup = () => CUP;
 
 export const ico = (k, cls = "i", fill) =>
@@ -54,7 +54,7 @@ export function failPage(frame, url, retry) {
   const v = (k, f) => cs.getPropertyValue(k).trim() || f;
   let host = url;
   try {
-    host = new URL(url).hostname.replace(./^www\./, "");
+    host = new URL(url).hostname.replace(/^www\./, "");
   } catch {}
   d.open();
   d.write(
@@ -97,4 +97,5 @@ export function segThumb(seg) {
 }
 
 export const initials = (name) =>
-  String(name || "?").trim().split(./\s+/).slice(0, 2).map((w) => w[0]).join("").toUpperCase() || "?";
+  String(name || "?").trim().split(/\s+/).slice(0, 2).map((w) => w[0]).join("").toUpperCase() || "?";
+
