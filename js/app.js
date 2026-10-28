@@ -1,3 +1,18 @@
+﻿function updateMediaSession(t) {
+  if (!('mediaSession' in navigator) || !t) return;
+  const artUrl = t.art ? new URL(t.art, window.location.origin).href : '';
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: t.title || t.name || 'Unknown Track',
+    artist: t.artist || 'Boba',
+    album: 'Boba Education',
+    artwork: artUrl ? [
+      { src: artUrl, sizes: '96x96' },
+      { src: artUrl, sizes: '128x128' },
+      { src: artUrl, sizes: '256x256' },
+      { src: artUrl, sizes: '512x512' }
+    ] : []
+  });
+}
 import { $, $$, el, esc, ico, store, segThumb, initials, cup, unexpired, failPage } from "./ui.js";
 import { get, still, favicon, hostOf } from "./api.js";
 import { SECTIONS, DISGUISES, ACCENTS, THEMES, AVATARS } from "./data.js";
@@ -132,12 +147,12 @@ const player = {
           if (tok !== this.tok) return;
           if (!src) throw new Error("no proxy");
           this.audio.src = src;
-          this.audio.play().catch(() => {});
+          this.audio.play().catch(() => {}); updateMediaSession(t);
         })
         .catch(() => tok === this.tok && this.fallback());
     } else {
       this.audio.src = t.preview;
-      this.audio.play().catch(() => {});
+      this.audio.play().catch(() => {}); updateMediaSession(t);
     }
     history.push({ kind: "song", key: "song:" + t.id, id: t.id, vid: t.vid || "", name: t.title, artist: t.artist, art: t.art, preview: t.preview || "" });
     this.emit();
@@ -152,11 +167,11 @@ const player = {
     this.full = false;
     this.tok++;
     this.audio.src = t.preview;
-    this.audio.play().catch(() => {});
+    this.audio.play().catch(() => {}); updateMediaSession(t);
   },
   toggle() {
     if (!this.cur()) return;
-    if (this.audio.paused) this.audio.play().catch(() => {});
+    if (this.audio.paused) { this.audio.play().catch(() => {}); updateMediaSession(this.cur()); }
     else this.audio.pause();
   },
   next() {
@@ -205,6 +220,12 @@ player.audio.addEventListener("playing", () => {
 });
 player.audio.addEventListener("error", () => player.fallback());
 player.audio.addEventListener("ended", () => (player.repeat ? player.play(player.list, player.i) : player.next()));
+if ('mediaSession' in navigator) {
+  navigator.mediaSession.setActionHandler('play', () => player.audio.play().catch(() => {}));
+  navigator.mediaSession.setActionHandler('pause', () => player.audio.pause());
+  navigator.mediaSession.setActionHandler('previoustrack', () => player.prev());
+  navigator.mediaSession.setActionHandler('nexttrack', () => player.next());
+}
 
 const mini = $("#mini");
 function paintMini() {
@@ -587,3 +608,6 @@ get("./api/config")
       setTimeout(() => intro.remove(), 800);
     }, 900);
   });
+
+
+
