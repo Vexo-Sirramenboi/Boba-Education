@@ -1,0 +1,73 @@
+warning: in the working copy of 'js/app.js', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/js/app.js b/js/app.js[m
+[1mindex 79937df..e4b063b 100644[m
+[1m--- a/js/app.js[m
+[1m+++ b/js/app.js[m
+[36m@@ -1,3 +1,18 @@[m
+[32m+[m[32m﻿function updateMediaSession(t) {[m
+[32m+[m[32m  if (!('mediaSession' in navigator) || !t) return;[m
+[32m+[m[32m  const artUrl = t.art ? new URL(t.art, window.location.origin).href : '';[m
+[32m+[m[32m  navigator.mediaSession.metadata = new MediaMetadata({[m
+[32m+[m[32m    title: t.title || t.name || 'Unknown Track',[m
+[32m+[m[32m    artist: t.artist || 'Boba',[m
+[32m+[m[32m    album: 'Boba Education',[m
+[32m+[m[32m    artwork: artUrl ? [[m
+[32m+[m[32m      { src: artUrl, sizes: '96x96' },[m
+[32m+[m[32m      { src: artUrl, sizes: '128x128' },[m
+[32m+[m[32m      { src: artUrl, sizes: '256x256' },[m
+[32m+[m[32m      { src: artUrl, sizes: '512x512' }[m
+[32m+[m[32m    ] : [][m
+[32m+[m[32m  });[m
+[32m+[m[32m}[m
+ import { $, $$, el, esc, ico, store, segThumb, initials, cup, unexpired, failPage } from "./ui.js";[m
+ import { get, still, favicon, hostOf } from "./api.js";[m
+ import { SECTIONS, DISGUISES, ACCENTS, THEMES, AVATARS } from "./data.js";[m
+[36m@@ -132,12 +147,12 @@[m [mconst player = {[m
+           if (tok !== this.tok) return;[m
+           if (!src) throw new Error("no proxy");[m
+           this.audio.src = src;[m
+[31m-          this.audio.play().catch(() => {});[m
+[32m+[m[32m          this.audio.play().catch(() => {}); updateMediaSession(t);[m
+         })[m
+         .catch(() => tok === this.tok && this.fallback());[m
+     } else {[m
+       this.audio.src = t.preview;[m
+[31m-      this.audio.play().catch(() => {});[m
+[32m+[m[32m      this.audio.play().catch(() => {}); updateMediaSession(t);[m
+     }[m
+     history.push({ kind: "song", key: "song:" + t.id, id: t.id, vid: t.vid || "", name: t.title, artist: t.artist, art: t.art, preview: t.preview || "" });[m
+     this.emit();[m
+[36m@@ -152,11 +167,11 @@[m [mconst player = {[m
+     this.full = false;[m
+     this.tok++;[m
+     this.audio.src = t.preview;[m
+[31m-    this.audio.play().catch(() => {});[m
+[32m+[m[32m    this.audio.play().catch(() => {}); updateMediaSession(t);[m
+   },[m
+   toggle() {[m
+     if (!this.cur()) return;[m
+[31m-    if (this.audio.paused) this.audio.play().catch(() => {});[m
+[32m+[m[32m    if (this.audio.paused) { this.audio.play().catch(() => {}); updateMediaSession(this.cur()); }[m
+     else this.audio.pause();[m
+   },[m
+   next() {[m
+[36m@@ -205,6 +220,12 @@[m [mplayer.audio.addEventListener("playing", () => {[m
+ });[m
+ player.audio.addEventListener("error", () => player.fallback());[m
+ player.audio.addEventListener("ended", () => (player.repeat ? player.play(player.list, player.i) : player.next()));[m
+[32m+[m[32mif ('mediaSession' in navigator) {[m
+[32m+[m[32m  navigator.mediaSession.setActionHandler('play', () => player.audio.play().catch(() => {}));[m
+[32m+[m[32m  navigator.mediaSession.setActionHandler('pause', () => player.audio.pause());[m
+[32m+[m[32m  navigator.mediaSession.setActionHandler('previoustrack', () => player.prev());[m
+[32m+[m[32m  navigator.mediaSession.setActionHandler('nexttrack', () => player.next());[m
+[32m+[m[32m}[m
+ [m
+ const mini = $("#mini");[m
+ function paintMini() {[m
+[36m@@ -587,3 +608,6 @@[m [mget("./api/config")[m
+       setTimeout(() => intro.remove(), 800);[m
+     }, 900);[m
+   });[m
+[41m+[m
+[41m+[m
+[41m+[m
