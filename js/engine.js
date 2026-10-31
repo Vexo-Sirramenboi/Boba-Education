@@ -1,4 +1,4 @@
-﻿const ux = (h, k = "b0b4cup") => h.match(/../g).map((x, i) => String.fromCharCode(parseInt(x, 16) ^ k.charCodeAt(i % k.length))).join("");
+const ux = (h, k = "b0b4cup") => h.match(./../g).map((x, i) => String.fromCharCode(parseInt(x, 16) ^ k.charCodeAt(i % k.length))).join("");
 const LINES = [
   "1543110e4c5a170b420e47130715125c07474d1a02051f155d4c",
   "1543110e4c5a040a550342021b1307580d4006195e015f0f1b131c1510434d",
@@ -164,8 +164,8 @@ export function boot() {
 export function normalise(input) {
   const raw = String(input || "").trim();
   if (!raw) return "";
-  if (/^https?:\/\//i.test(raw)) return raw;
-  if (/^[a-z0-9-]+(\.[a-z0-9-]+)+(\/\S*)?$/i.test(raw)) return "https://" + raw;
+  if (./^https?:\/\//i.test(raw)) return raw;
+  if (./^[a-z0-9-]+(\.[a-z0-9-]+)+(\/\S*)?$/i.test(raw)) return "https://" + raw;
   return "https://duckduckgo.com/?q=" + encodeURIComponent(raw);
 }
 
@@ -205,4 +205,3 @@ export async function open(input, mode) {
 export function setAdblock(on) {
   navigator.serviceWorker?.controller?.postMessage({ type: "adblock", on: !!on });
 }
-
